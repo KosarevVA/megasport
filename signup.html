@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="assets/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/styles/styles.css?122222312">
+    <title>Войти</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-3">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/megasport/">MEGASPORT</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-3">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="company.html">Компания</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                    <li><a href="news.html">Новости</a></li>
+                    <li><a href="login.html">Войти</a></li>
+                    <li>
+                        <a class="btn btn-default btn-outline btn-circle" data-toggle="collapse" href="#nav-collapse3" aria-expanded="false" aria-controls="nav-collapse3">Поиск</a>
+                    </li>
+                </ul>
+                <div class="collapse nav navbar-nav nav-collapse" id="nav-collapse3">
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Например... Велосипед" />
+                        </div>
+                        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container row">
+        <h2 class="m-t-0">Авторизация</h2>
+    </div>
+    <div class="container">
+        <p>Для регистрации на сайте введите необходимые данные.</p>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="login" class="col-sm-2 control-label">Ваш логин</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="login" placeholder="Ваш логин">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Ваше имя</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" placeholder="Ваше имя">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="col-sm-2 control-label">Ваш Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="email" placeholder="Ваше Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone" class="col-sm-2 control-label">Ваш телефон</label>
+                <div class="col-sm-10">
+                    <input type="tel" class="form-control" id="phone" placeholder="Ваше телефон">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-sm-2 control-label">Ваш пароль</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="password" placeholder="Ваш пароль">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="confirmedpassword" class="col-sm-2 control-label">Подтвердите пароль</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="confirmedpassword" placeholder="Подтвердите пароль">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> Я согласен на обработку персональных данных
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">Зарегистрироваться</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="assets/scripts/contacts.js"></script>
+</body>
+</html>
