@@ -9,11 +9,11 @@ class Controller
 	protected string $action;
 	protected ControllerInterface $controller;
 
-	public function __construct(array $route)
+	public function __construct(Route $route)
 	{
-		$this->filePath = '/app/controllers/' . $route['controller'] . '.php';;
-		$this->controllerType = $route['controller'];
-		$this->action = $route['action'];
+		$this->filePath = '/app/controllers/' . $route->getController() . '.php';
+		$this->controllerType = $route->getController();
+		$this->action = $route->getAction();
 	}
 
 	public function run()

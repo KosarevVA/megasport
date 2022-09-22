@@ -4,7 +4,7 @@ namespace App\Modules\System;
 
 class Application
 {
-	protected array $currRoute;
+	protected Route $currRoute;
 
 	public function run() : void
 	{
