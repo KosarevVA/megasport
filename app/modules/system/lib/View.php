@@ -4,11 +4,11 @@ namespace App\Modules\System;
 
 class View
 {
-	public function show(string $viewName, array $result)
+	public function show(string $viewName, array $result = [])
 	{
 		$this->startBuffering();
 		$this->showHeader();
-		$this->showContent($viewName);
+		$this->showContent($viewName, $result);
 		$this->showFooter();
 		echo $this->stopBuffering();
 	}
@@ -27,7 +27,7 @@ class View
 		}
 	}
 
-	public function showContent(string $viewName)
+	public function showContent(string $viewName, array $result)
 	{
 		require_once $_SERVER['DOCUMENT_ROOT'] . '/app/views/' . $viewName . '.php';
 	}
