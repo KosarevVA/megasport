@@ -8,4 +8,5 @@ return [
 	'/megasport/signin/do' => new Route('Signin', 'signIn'),
 	'/megasport/signup/' => new Route('Signup', 'index'),
 	'/megasport/signup/do' => new Route('Signup', 'signUp'),
+	'/megasport/' => new Route('Index', 'index'),
 ];
