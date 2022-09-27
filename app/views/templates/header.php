@@ -65,7 +65,7 @@
 					<li><a href="company.html">Компания</a></li>
 					<li><a href="contacts.html">Контакты</a></li>
 					<li><a href="news.html">Новости</a></li>
-					<li><a href="login.html">Войти</a></li>
+					<li><a href="/megasport/signin/">Войти</a></li>
 					<li>
 						<a class="btn btn-default btn-outline btn-circle" data-toggle="collapse" href="#nav-collapse3" aria-expanded="false" aria-controls="nav-collapse3">Поиск</a>
 					</li>

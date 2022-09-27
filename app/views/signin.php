@@ -10,7 +10,7 @@ $this->setTitle('Авторизация');
         <div class="form-group">
             <label for="login" class="col-sm-2 control-label">Ваш Email</label>
             <div class="col-sm-10">
-                <input type="email" class="form-control" id="email" name="email" placeholder="Ваш Email">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Ваш Email" value="<?= $result['input']['email'] ?? '' ?>">
             </div>
         </div>
         <div class="form-group">
@@ -31,8 +31,13 @@ $this->setTitle('Авторизация');
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-success">Войти</button>
-                <a href="signup.html" class="btn btn-primary">Зарегистрироваться</a>
+                <a href="/megasport/signup/" class="btn btn-primary">Зарегистрироваться</a>
             </div>
         </div>
     </form>
+	<?if(isset($result['errors'])):?>
+		<?foreach ($result['errors'] as $error):?>
+            <div class="alert alert-danger" role="alert"><?=$error?></div>
+		<?endforeach;?>
+	<?endif;?>
 </div>
