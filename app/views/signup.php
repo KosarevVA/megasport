@@ -1,3 +1,6 @@
+<?
+$this->setTitle('Регистрация');
+?>
 <div class="container row">
 	<h2 class="m-t-0">Регистрация</h2>
 </div>
