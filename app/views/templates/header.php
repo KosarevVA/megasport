@@ -1,3 +1,7 @@
+<?
+use App\Modules\System\Container;
+use App\Modules\System\User;
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,7 +69,14 @@
 					<li><a href="company.html">Компания</a></li>
 					<li><a href="contacts.html">Контакты</a></li>
 					<li><a href="news.html">Новости</a></li>
-					<li><a href="/megasport/signin/">Войти</a></li>
+                    <?
+                    $user = Container::getInstance()->get(User::class);
+                    if($user->isAuthorized()):
+                    ?>
+					<li><a href="/megasport/logout/">Выйти</a></li>
+                    <?else:?>
+                    <li><a href="/megasport/signin/">Войти</a></li>
+                    <?endif;?>
 					<li>
 						<a class="btn btn-default btn-outline btn-circle" data-toggle="collapse" href="#nav-collapse3" aria-expanded="false" aria-controls="nav-collapse3">Поиск</a>
 					</li>
