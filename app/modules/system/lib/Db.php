@@ -23,46 +23,42 @@ class Db
 		}
 	}
 
-	final public function sqlExecution(string $sql, array $arParams = []) : array
+	final public function sqlExecution(string $sql, array $values = [])
 	{
-		$status = true;
-		preg_match_all('/:([A-Za-z0-9_]+)/', $sql, $matches);
-		$values = $matches[1];
-		if(count($values) != count($arParams))
-		{
-			return [
-				'status' => false,
-				'description' => 'Check your param array'
-			];
-		}
-		$stmt = $this->pdo->prepare($sql);
-		$requestType = self::getRequestType($sql);
-		$response = $stmt->execute($arParams);
-		if($response)
-		{
-			if($requestType == 'SELECT')
+		try {
+			$placeholders = self::getPlaceholdersFromSql($sql);
+			self::checkValuesCount($placeholders, $values);
+			$stmt = $this->pdo->prepare($sql);
+			$requestType = self::getRequestType($sql);
+			if($stmt->execute($values))
 			{
-				return [
-					'status' => true,
-					'data' => $stmt->fetchAll()
-				];
-			}elseif($requestType == 'INSERT')
-			{
-				return [
-					'status' => true,
-					'id' => $this->pdo->lastInsertId()
-				];
-			}else
-			{
-				return [
-					'status' => true
-				];
+				if($requestType == 'SELECT')
+				{
+					return $this->fetchSelectQuery($stmt);
+				}elseif($requestType == 'INSERT')
+				{
+					return $this->pdo->lastInsertId();
+				}
+				return true;
 			}
+		}catch (\Exception $exception)
+		{
+			echo $exception->getMessage();
 		}
-		return [
-			'status' => false,
-			'description' => 'PDO error'
-		];
+	}
+
+	static public function getPlaceholdersFromSql(string $sql)
+	{
+		preg_match_all('/:([A-Za-z0-9_]+)/', $sql, $matches);
+		return $matches[1];
+	}
+
+	static public function checkValuesCount(array $placeholders, array $values)
+	{
+		if(count($placeholders) != count($values))
+		{
+			throw new \Exception('The count placeholders is not equal to the count if values');
+		}
 	}
 
 	final static public function getRequestType(string $sql)
@@ -73,5 +69,14 @@ class Db
 			return $matches[0];
 		}
 		return false;
+	}
+
+	public function fetchSelectQuery(\PDOStatement $stmt)
+	{
+		if($stmt->rowCount() > 1)
+		{
+			return $stmt->fetchAll();
+		}
+		return $stmt->fetch();
 	}
 }
