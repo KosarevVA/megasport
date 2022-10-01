@@ -40,6 +40,9 @@ class Db
 					return $this->pdo->lastInsertId();
 				}
 				return true;
+			}else
+			{
+				throw new \Exception('Ooopss... Something goes wrong!');
 			}
 		}catch (\Exception $exception)
 		{
@@ -57,7 +60,7 @@ class Db
 	{
 		if(count($placeholders) != count($values))
 		{
-			throw new \Exception('The count placeholders is not equal to the count if values');
+			throw new \Exception('The count placeholders is not equal to the count of values');
 		}
 	}
 
