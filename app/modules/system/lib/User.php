@@ -22,24 +22,8 @@ class User
 	{
 		$this->db = $db;
 		$this->session = $session;
-		$this->setUserParameters();
 	}
 
-	public function setUserParameters()
-	{
-		if($this->isAuthorized())
-		{
-			$userId = $this->session->get('USER');
-			$userParameters = $this->db->sqlExecution("SELECT * FROM `users` WHERE `id` = :id", [$userId['id']]);
-			$this->setId($userParameters['data'][0]['id']);
-			$this->setName($userParameters['data'][0]['name']);
-			$this->setEmail($userParameters['data'][0]['email']);
-			$this->setPhone($userParameters['data'][0]['phone']);
-			$this->setPhone($userParameters['data'][0]['phone']);
-			$this->setRegisterDate($userParameters['data'][0]['register_date']);
-			$this->setAccessLevel($userParameters['data'][0]['access_level']);
-		}
-	}
 	public function setId(string $id) : void
 	{
 		$this->id = $id;
@@ -78,8 +62,8 @@ class User
 	public function authorize()
 	{
 		$httpContext = Container::getInstance()->get(HttpContext::class);
-		$email = $httpContext->getPostOption('email');
-		$password = $httpContext->getPostOption('password');
+		$email = $httpContext->getParameter('email');
+		$password = $httpContext->getParameter('password');
 
 		$errors = [];
 
@@ -97,16 +81,16 @@ class User
 			try {
 				$sql = "SELECT * FROM `users` WHERE `email` = :email";
 				$user = $this->db->sqlExecution($sql, [$email]);
-				if($user['data'])
+				if($user)
 				{
-					if(password_verify($password, $user['data'][0]['password']))
+					if(password_verify($password, $user['password']))
 					{
 						$userSessionParameters = [
-							'id' => $user['data'][0]['id'],
-							'access_level' => $user['data'][0]['access_level']
+							'id' => $user['id'],
+							'access_level' => $user['access_level']
 						];
 						$this->session->set('USER', $userSessionParameters);
-						header('Location: /megasport/main');
+						header('Location: /megasport/');
 						die();
 					}else
 					{
@@ -132,13 +116,13 @@ class User
 	public function registration()
 	{
 		$httpContext = Container::getInstance()->get(HttpContext::class);
-		$login = $httpContext->getPostOption('login');
-		$name = $httpContext->getPostOption('name');
-		$email = $httpContext->getPostOption('email');
-		$phone = $httpContext->getPostOption('phone');
-		$password = $httpContext->getPostOption('password');
-		$confirmedPassword = $httpContext->getPostOption('confirmedPassword');
-		$personalData = $httpContext->getPostOption('personalData');
+		$login = $httpContext->getParameter('login');
+		$name = $httpContext->getParameter('name');
+		$email = $httpContext->getParameter('email');
+		$phone = $httpContext->getParameter('phone');
+		$password = $httpContext->getParameter('password');
+		$confirmedPassword = $httpContext->getParameter('confirmedPassword');
+		$personalData = $httpContext->getParameter('personalData');
 
 		$errors = [];
 
@@ -190,49 +174,31 @@ class User
 		die();
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getId(): string
 	{
 		return $this -> id;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getName(): string
 	{
 		return $this -> name;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getEmail(): string
 	{
 		return $this -> email;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getPhone(): string
 	{
 		return $this -> phone;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getRegisterDate(): string
 	{
 		return $this -> registerDate;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getAccessLevel(): string
 	{
 		return $this -> accessLevel;

@@ -4,48 +4,28 @@ namespace App\Modules\System;
 
 class HttpContext
 {
-	protected array $httpPostOptions;
-	protected array $httpGetOptions;
+	protected array $httpRequestValues;
 
 	public function __construct()
 	{
-		$this->setHttpGetOptions();
-		$this->setHttpPostOptions();
+		$this->setHttpRequestValues();
 		//TODO добавить методы для работы с url
 	}
 
-	public function setHttpPostOptions()
+	public function setHttpRequestValues()
 	{
-		foreach ($_POST as $name => $value)
+		foreach ($_REQUEST as $name => $value)
 		{
-			$this->httpPostOptions[$name] = htmlspecialchars($value);
+			$this->httpRequestValues[$name] = htmlspecialchars($value);
 		}
 	}
 
-	public function setHttpGetOptions()
-	{
-		foreach ($_GET as $name => $value)
-		{
-			$this->httpGetOptions[$name] = htmlspecialchars($value);
-		}
-	}
-
-	public function getPostOption(string $optionName) : string
+	public function getParameter(string $key) : string
 	{
 		$result = "";
-		if(isset($this->httpPostOptions[$optionName]))
+		if(isset($this->httpPostOptions[$key]))
 		{
-			$result = $this->httpPostOptions[$optionName];
-		}
-		return $result;
-	}
-
-	public function getGetOption(string $optionName) : string
-	{
-		$result = "";
-		if(isset($this->httpGetOptions[$optionName]))
-		{
-			$result = $this->httpGetOptions[$optionName];
+			$result = $this->httpPostOptions[$key];
 		}
 		return $result;
 	}
