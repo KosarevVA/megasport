@@ -44,6 +44,8 @@ class Router
 			if(preg_match('/^' . str_replace('/', '\/', trim($route, '/')) . '$/', trim($this->currentURL, '/'), $matches))
 			{
 				unset($matches[0]);
+				$globalStorage = Container::getInstance()->get(GlobalStorage::class);
+				$globalStorage->set('URL_PARAMETERS', $matches);
 				$metaData->setMatches($matches);
 				return $metaData;
 			}
