@@ -18,6 +18,7 @@ class Container
 			Session::class => fn () => new Session(),
 			User::class => fn() => new User(self::get(Db::class), self::get(Session::class)),
 			HttpContext::class => fn() => new HttpContext(),
+			GlobalStorage::class => fn() => new GlobalStorage()
 		];
 	}
 
