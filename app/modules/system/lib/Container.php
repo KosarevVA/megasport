@@ -2,6 +2,8 @@
 
 namespace App\Modules\System;
 
+use App\Modules\Catalog\Category;
+
 class Container
 {
 	protected array $services;
@@ -18,7 +20,8 @@ class Container
 			Session::class => fn () => new Session(),
 			User::class => fn() => new User(self::get(Db::class), self::get(Session::class)),
 			HttpContext::class => fn() => new HttpContext(),
-			GlobalStorage::class => fn() => new GlobalStorage()
+			GlobalStorage::class => fn() => new GlobalStorage(),
+			Category::class => fn() => new Category(self::get(Db::class)),
 		];
 	}
 
