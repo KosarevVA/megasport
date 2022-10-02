@@ -65,7 +65,7 @@ use App\Modules\System\User;
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-collapse-3">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="catalog.html">Каталог</a></li>
+					<li><a href="/megasport/categories/">Каталог</a></li>
 					<li><a href="company.html">Компания</a></li>
 					<li><a href="contacts.html">Контакты</a></li>
 					<li><a href="news.html">Новости</a></li>
