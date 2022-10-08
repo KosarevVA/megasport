@@ -27,4 +27,14 @@ class Product
 		}
 		return $products;
 	}
+
+	public function getProductById(int $productId)
+	{
+		$sql = "SELECT * FROM `products` WHERE `id` = :id";
+		$product = $this->db->sqlExecution($sql, [$productId]);
+		$sql = "SELECT * FROM `property_values` JOIN `properties` ON `property_values`.`property` = `properties`.`id` WHERE `property_values`.`product` = :product;";
+		$additionalFields = $this->db->sqlExecution($sql, [$productId]);
+		$product['ADDITIONAL_FIELDS'] = $additionalFields;
+		return $product;
+	}
 }
