@@ -13,6 +13,11 @@ $this->setTitle($result['CATEGORY']['name'] . ' - каталог интерне�
                     <div class="caption">
                         <h3><?=$product['name']?></h3>
                         <p><?=$product['description']?></p>
+	                    <?if(isset($product['ADDITIONAL_FIELDS']) && !empty($product['ADDITIONAL_FIELDS'])):?>
+		                    <?foreach($product['ADDITIONAL_FIELDS'] as $field):?>
+                                <h4><?=$field['name']?>: <?=$field['value']?></h4>
+		                    <?endforeach;?>
+	                    <?endif;?>
                         <h4>Цена: <?=$product['price']?> ₽</h4>
                         <p><a href="/megasport/basket/add/<?=$product['id']?>" class="btn btn-success" role="button">В корзину</a></p>
                     </div>
