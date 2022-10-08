@@ -10,4 +10,5 @@ return [
 	'/megasport/signup/do' => new Route('Signup', 'signUp'),
 	'/megasport/' => new Route('Index', 'index'),
 	'/megasport/categories/' => new Route('Categories', 'index'),
+	'/megasport/category/(?<id>[0-9]+)/' => new Route('Category', 'index'),
 ];

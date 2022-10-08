@@ -3,6 +3,7 @@
 namespace App\Modules\System;
 
 use App\Modules\Catalog\Category;
+use App\Modules\Catalog\Product;
 
 class Container
 {
@@ -22,6 +23,7 @@ class Container
 			HttpContext::class => fn() => new HttpContext(),
 			GlobalStorage::class => fn() => new GlobalStorage(),
 			Category::class => fn() => new Category(self::get(Db::class)),
+			Product::class => fn() => new Product(self::get(Db::class)),
 		];
 	}
 
