@@ -23,9 +23,9 @@ class HttpContext
 	public function getParameter(string $key) : string
 	{
 		$result = "";
-		if(isset($this->httpPostOptions[$key]))
+		if(isset($this->httpRequestValues[$key]))
 		{
-			$result = $this->httpPostOptions[$key];
+			$result = $this->httpRequestValues[$key];
 		}
 		return $result;
 	}
