@@ -29,4 +29,9 @@ class HttpContext
 		}
 		return $result;
 	}
+
+	public function getCurrentURL()
+	{
+		return $_SERVER['REQUEST_URI'];
+	}
 }
