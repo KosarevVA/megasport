@@ -2,7 +2,9 @@
 
 namespace App\Modules\Catalog;
 
+use App\Modules\System\Container;
 use App\Modules\System\Db;
+use App\Modules\System\Session;
 
 class Product
 {
@@ -24,6 +26,7 @@ class Product
 			{
 				$products[$index]['ADDITIONAL_FIELDS'] = $additionalFields;
 			}
+			$products[$index]['BASKET']['COUNT'] = $this->getProductCountFromBasket($product['id']);
 		}
 		return $products;
 	}
@@ -36,5 +39,15 @@ class Product
 		$additionalFields = $this->db->sqlExecution($sql, [$productId]);
 		$product['ADDITIONAL_FIELDS'] = $additionalFields;
 		return $product;
+	}
+
+	public function getProductCountFromBasket(int $productId)
+	{
+		$container = Container::getInstance();
+		$session = $container->get(Session::class);
+		$user = $session->get('USER');
+		$sql = "SELECT * FROM `basket` LEFT JOIN `order_items` ON `basket`.`id` = `order_items`.`basket` WHERE `product` = :product AND `user` = :user ORDER BY `basket`.`id` desc LIMIT 1";
+		$basketItem = $this->db->sqlExecution($sql, [$productId, $user['id']]);
+		return $basketItem? $basketItem['order']?0:$basketItem['count'] : 0;
 	}
 }
