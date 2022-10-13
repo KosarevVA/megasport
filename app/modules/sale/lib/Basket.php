@@ -26,7 +26,8 @@ class Basket
 			$userId = $session->get('USER')['id'];
 			if($userId)
 			{
-				if($basketItem = $this->getBasketItem($userId, $productId))
+				$basketItem = $this->getBasketItem($userId, $productId);
+				if(!$basketItem['order'])
 				{
 					$basketItemId = $basketItem['id'];
 					$currentBasketItemCount = ++$basketItem['count'];
@@ -48,7 +49,7 @@ class Basket
 
 	public function getBasketItem(int $userId, int $productId)
 	{
-		$sql = "SELECT * FROM `basket` WHERE `product` = :product AND `user` = :user";
+		$sql = "SELECT `basket`.*, `order_items`.`order`  FROM `basket` LEFT JOIN `order_items` ON `basket`.`id` = `order_items`.`basket` WHERE `product` = :product AND `user` = :user ORDER BY `basket`.`id` desc LIMIT 1";
 		return $this->db->sqlExecution($sql, [$productId, $userId]);
 	}
 }
