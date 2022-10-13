@@ -29,7 +29,7 @@ class Basket
 				if($basketItem = $this->getBasketItem($userId, $productId))
 				{
 					$basketItemId = $basketItem['id'];
-					$currentBasketItemCount = $basketItem['count']++;
+					$currentBasketItemCount = ++$basketItem['count'];
 					$sql = "UPDATE `basket` SET `count` = :count WHERE `id` = :id";
 					$this->db->sqlExecution($sql, [$currentBasketItemCount, $basketItemId]);
 				}else
