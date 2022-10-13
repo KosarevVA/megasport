@@ -46,7 +46,7 @@ class Basket
 		die();
 	}
 
-	public function getBasketItem(int $userId, int $productId) : array
+	public function getBasketItem(int $userId, int $productId)
 	{
 		$sql = "SELECT * FROM `basket` WHERE `product` = :product AND `user` = :user";
 		return $this->db->sqlExecution($sql, [$productId, $userId]);
