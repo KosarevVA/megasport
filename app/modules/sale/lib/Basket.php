@@ -52,4 +52,26 @@ class Basket
 		$sql = "SELECT `basket`.*, `order_items`.`order`  FROM `basket` LEFT JOIN `order_items` ON `basket`.`id` = `order_items`.`basket` WHERE `product` = :product AND `user` = :user ORDER BY `basket`.`id` desc LIMIT 1";
 		return $this->db->sqlExecution($sql, [$productId, $userId]);
 	}
+
+	public function getBasketByUserId(int $userId) : array
+	{
+		$sql = "SELECT `basket`.*, `order_items`.`order`, `products`.*  FROM `basket` LEFT JOIN `order_items` ON `basket`.`id` = `order_items`.`basket` JOIN `products` ON `basket`.`product` = `products`.`id` WHERE `user` = :user AND `order` IS NULL;";
+		$basketItems = $this->db->sqlExecution($sql, [$userId]);
+		foreach($basketItems as $index => $item)
+		{
+			$basketItems[$index]['full_price'] = $item['count'] * $item['price'];
+			$basketItems[$index]['detail_page'] = '/megasport/product/' . $item['id'];
+		}
+		return $basketItems;
+	}
+
+	public function getOrderPriceByBasketItems(array $basketItems) : int
+	{
+		$orderPrice = 0;
+		foreach($basketItems as $item)
+		{
+			$orderPrice += $item['count'] * $item['price'];
+		}
+		return $orderPrice;
+	}
 }
