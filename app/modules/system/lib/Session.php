@@ -40,7 +40,10 @@ class Session
 
 	static public function get(string $key)
 	{
-		return $_SESSION[$key];
+		if(self::has($key))
+		{
+			return $_SESSION[$key];
+		}
 	}
 
 	static public function has(string $key)
