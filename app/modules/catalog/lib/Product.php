@@ -16,6 +16,7 @@ class Product
 
 	public function getProductsByCategoryId(int $categoryId)
 	{
+		$container = Container::getInstance();
 		$sql = "SELECT * FROM `products` JOIN `catalog` ON `products`.`id` = `catalog`.`product` WHERE `catalog`.`category` = :id;";
 		$products = $this->db->sqlExecution($sql, [$categoryId]);
 		foreach($products as $index => $product)
@@ -26,7 +27,11 @@ class Product
 			{
 				$products[$index]['ADDITIONAL_FIELDS'] = $additionalFields;
 			}
-			$products[$index]['BASKET']['COUNT'] = $this->getProductCountFromBasket($product['id']);
+			$session = $container->get(Session::class);
+			if($session->has('USER'))
+			{
+				$products[$index]['BASKET']['COUNT'] = $this->getProductCountFromBasket($product['id']);
+			}
 		}
 		return $products;
 	}
