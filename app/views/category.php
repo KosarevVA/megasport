@@ -19,8 +19,10 @@ $this->setTitle($result['CATEGORY']['name'] . ' - каталог интерне�
 		                    <?endforeach;?>
 	                    <?endif;?>
                         <h4>Цена: <?=$product['price']?> ₽</h4>
-                        <?if($product['BASKET']['COUNT']):?>
-                            <p>В корзине <?=$product['BASKET']['COUNT']?> шт.</p>
+                        <?if(isset($product['BASKET'])):?>
+	                        <?if($product['BASKET']['COUNT']):?>
+                                <p>В корзине <?=$product['BASKET']['COUNT']?> шт.</p>
+	                        <?endif;?>
                         <?endif;?>
                         <a href="/megasport/basket/add/<?=$product['id']?>" class="btn btn-success" role="button">В корзину</a>
                     </div>
