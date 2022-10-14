@@ -203,4 +203,10 @@ class User
 	{
 		return $this -> accessLevel;
 	}
+
+	public function logout()
+	{
+		$this->session->clear();
+		header('Location: /megasport/');
+	}
 }

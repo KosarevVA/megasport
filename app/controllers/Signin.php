@@ -24,4 +24,9 @@ class Signin implements ControllerInterface
 		$view = new View();
 		$view->show('signin', $result);
 	}
+
+	public function logout()
+	{
+		$user = Container::getInstance()->get(User::class)->logout();
+	}
 }
