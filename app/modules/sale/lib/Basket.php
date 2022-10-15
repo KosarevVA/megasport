@@ -26,8 +26,8 @@ class Basket
 			$userId = $session->get('USER')['id'];
 			if($userId)
 			{
-				$basketItem = $this->getBasketItem($userId, $productId);
-				if(!$basketItem['order'])
+				$basketItem = $this->getBasketItem($userId, $productId)[0];
+				if(isset($basketItem) && !$basketItem['order'])
 				{
 					$basketItemId = $basketItem['id'];
 					$currentBasketItemCount = ++$basketItem['count'];
@@ -73,5 +73,56 @@ class Basket
 			$orderPrice += $item['count'] * $item['price'];
 		}
 		return $orderPrice;
+	}
+
+	public function addOneItemToBasketByProductId(int $productId) : bool
+	{
+		$container = Container::getInstance();
+		$session = $container->get(Session::class);
+		$user = $session->get('USER');
+		$basketItem = $this->getBasketItem($user['id'], $productId);
+		$currentBasketItemCount = ++$basketItem[0]['count'];
+		$sql = "UPDATE `basket` SET `count` = :count WHERE `id` = :id";
+		return $this->db->sqlExecution($sql, [$currentBasketItemCount, $basketItem[0]['id']]);
+	}
+
+	public function deleteOneItemToBasketByProductId(int $productId) : bool
+	{
+		$container = Container::getInstance();
+		$session = $container->get(Session::class);
+		$user = $session->get('USER');
+		$basketItem = $this->getBasketItem($user['id'], $productId);
+		$currentBasketItemCount = --$basketItem[0]['count'];
+		if($currentBasketItemCount == 0)
+		{
+			$sql = "DELETE FROM `megasport`.`basket` WHERE (`id` = :id)";
+			return $this->db->sqlExecution($sql, [$basketItem[0]['id']]);
+		}
+		$sql = "UPDATE `basket` SET `count` = :count WHERE `id` = :id";
+		return $this->db->sqlExecution($sql, [$currentBasketItemCount, $basketItem[0]['id']]);
+	}
+
+	public function getBasketItemCountByBasketItems(array $basketItems, int $productId) : int
+	{
+		foreach($basketItems as $basketItem)
+		{
+			if($basketItem['id'] == $productId)
+			{
+				return $basketItem['count'];
+			}
+		}
+		return 0;
+	}
+
+	public function getBasketItemPriceByBasketItems(array $basketItems, int $productId) : int
+	{
+		foreach($basketItems as $basketItem)
+		{
+			if($basketItem['id'] == $productId)
+			{
+				return $basketItem['count'] * $basketItem['price'];
+			}
+		}
+		return 0;
 	}
 }

@@ -15,4 +15,6 @@ return [
 	'/megasport/product/(?<id>[0-9]+)/' => new Route('Product', 'index'),
 	'/megasport/basket/add/(?<product>[0-9]+)/' => new Route('Basket', 'add'),
 	'/megasport/basket/' => new Route('Basket', 'index'),
+	'/megasport/basket/plus/' => new Route('Basket', 'plus'),
+	'/megasport/basket/minus/' => new Route('Basket', 'minus'),
 ];
