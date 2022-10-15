@@ -134,10 +134,7 @@ class User
 		{
 			$errors[] = "Пароли не совпадают!";
 		}
-		if(!Validation::nameValidate($name))
-		{
-			$errors[] = "Имя должно состоять минимум из двух слов!";
-		}
+		//TODO Добавить валидацию имени
 		if(!Validation::emailValidate($email))
 		{
 			$errors[] = "Неккоректный email!";
@@ -151,9 +148,12 @@ class User
 			$errors[] = "Слишком простой пароль!";
 		}
 		try {
-			$password = password_hash($password, PASSWORD_BCRYPT);
-			$registerDate = date('Y-m-j G:i:s');
-			$this->db->sqlExecution("INSERT INTO `users` (`name`, `email`, `phone`, `password`, `register_date`) VALUES (:name, :email, :phone, :password, :register_date);", [$name, $email, $phone, $password, $registerDate]);
+			if(!$errors)
+			{
+				$password = password_hash($password, PASSWORD_BCRYPT);
+				$registerDate = date('Y-m-j G:i:s');
+				$this->db->sqlExecution("INSERT INTO `users` (`name`, `email`, `phone`, `password`, `register_date`) VALUES (:name, :email, :phone, :password, :register_date);", [$name, $email, $phone, $password, $registerDate]);
+			}
 		}catch (\Exception $exception)
 		{
 			$errors[] = $this->dbErrors[$exception->getCode()];
