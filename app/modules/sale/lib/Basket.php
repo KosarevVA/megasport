@@ -38,7 +38,7 @@ class Basket
 					$sql = "INSERT INTO `basket` (`product`, `user`) VALUES (:productId, :userId)";
 					$this->db->sqlExecution($sql , [$productId, $userId]);
 				}
-				header('Location: /megasport/categories/');
+				header('Location: /megasport/basket/');
 			}
 		}else
 		{
