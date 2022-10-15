@@ -34,7 +34,7 @@ class Db
 			{
 				if($requestType == 'SELECT')
 				{
-					return $this->fetchSelectQuery($stmt);
+					return $stmt->fetchAll();
 				}elseif($requestType == 'INSERT')
 				{
 					return $this->pdo->lastInsertId();
@@ -72,14 +72,5 @@ class Db
 			return $matches[0];
 		}
 		return false;
-	}
-
-	public function fetchSelectQuery(\PDOStatement $stmt)
-	{
-		if($stmt->rowCount() > 1)
-		{
-			return $stmt->fetchAll();
-		}
-		return $stmt->fetch();
 	}
 }
