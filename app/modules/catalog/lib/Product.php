@@ -53,6 +53,6 @@ class Product
 		$user = $session->get('USER');
 		$sql = "SELECT * FROM `basket` LEFT JOIN `order_items` ON `basket`.`id` = `order_items`.`basket` WHERE `product` = :product AND `user` = :user ORDER BY `basket`.`id` desc LIMIT 1";
 		$basketItem = $this->db->sqlExecution($sql, [$productId, $user['id']]);
-		return $basketItem? $basketItem['order']?0:$basketItem['count'] : 0;
+		return $basketItem? $basketItem[0]['order']?0:$basketItem[0]['count'] : 0;
 	}
 }

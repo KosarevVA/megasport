@@ -1,8 +1,8 @@
 <?
-$this->setTitle($result['CATEGORY']['name'] . ' - каталог интернет-магазина MEGASPORT');
+$this->setTitle($result['CATEGORY'][0]['name'] . ' - каталог интернет-магазина MEGASPORT');
 ?>
 <div class="container row">
-	<h2><?=$result['CATEGORY']['name']?></h2>
+	<h2><?=$result['CATEGORY'][0]['name']?></h2>
 </div>
 <div class="row">
     <?foreach ($result['PRODUCTS'] as $product):?>
