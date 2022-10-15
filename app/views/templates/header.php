@@ -73,6 +73,7 @@ use App\Modules\System\User;
                     $user = Container::getInstance()->get(User::class);
                     if($user->isAuthorized()):
                     ?>
+					<li><a href="/megasport/basket/">Корзина</a></li>
 					<li><a href="/megasport/logout/">Выйти</a></li>
                     <?else:?>
                     <li><a href="/megasport/signin/">Войти</a></li>
