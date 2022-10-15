@@ -1,4 +1,5 @@
 <?
+$result = $result[0];
 $this->setTitle($result['name'] . ' - каталог интернет-магазина MEGASPORT');
 ?>
 <div class="container row">
