@@ -32,7 +32,9 @@ $this->setTitle('Корзина');
             <label for="exampleDataList" class="form-label">Город</label>
             <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Выберите город..." name="city">
             <datalist id="datalistOptions">
-                <option value="Москва">
+	            <?foreach($result['CITIES'] as $city):?>
+                <option value="<?=$city['name']?>">
+                <?endforeach;?>
             </datalist>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Адрес</label>
