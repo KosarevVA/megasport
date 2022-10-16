@@ -86,8 +86,8 @@ class User
 					if(password_verify($password, $user[0]['password']))
 					{
 						$userSessionParameters = [
-							'id' => $user['id'],
-							'access_level' => $user['access_level']
+							'id' => $user[0]['id'],
+							'access_level' => $user[0]['access_level']
 						];
 						$this->session->set('USER', $userSessionParameters);
 						header('Location: /megasport/');
