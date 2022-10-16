@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Modules\Sale\Cities;
 use App\Modules\Sale\DeliveryCompanies;
+use App\Modules\Sale\PaymentTypes;
 use App\Modules\System\Container;
 use App\Modules\System\GlobalStorage;
 use \App\Modules\Sale\Basket as BT;
@@ -37,12 +38,14 @@ class Basket implements \App\Modules\System\ControllerInterface
 		$orderPrice = $basket->getOrderPriceByBasketItems($basketItems);
 		$deliveryCompanies = $container->get(DeliveryCompanies::class)->getDeliveryCompanies();
 		$cities = $container->get(Cities::class)->getCities();
+		$paymentTypes = $container->get(PaymentTypes::class)->getPaymentTypes();
 		$view = new View();
 		$view->show('basket', [
 			'BASKET' => $basketItems,
 			'ORDER_PRICE' => $orderPrice,
 			'DELIVERY_COMPANIES' => $deliveryCompanies,
-			'CITIES' => $cities
+			'CITIES' => $cities,
+			'PAYMENT_TYPES' => $paymentTypes
 		]);
 	}
 

@@ -42,10 +42,11 @@ $this->setTitle('Корзина');
             </div>
             <h4>Способ оплаты</h4>
             <label for="exampleDataList" class="form-label">Способ оплаты</label>
-            <input class="form-control" list="paymentsOptions" id="exampleDataList" placeholder="Выберите спопоб оплаты" name="payment_type">
-            <datalist id="paymentsOptions">
-                <option value="Онлайн картой">
-            </datalist>
+            <select class="form-control" id="exampleDataList" name="payment_type">
+		        <?foreach($result['PAYMENT_TYPES'] as $paymentType):?>
+                    <option value="<?=$paymentType['id']?>"><?=$paymentType['name']?></option>
+		        <?endforeach;?>
+            </select>
             <button class="btn btn-success" style="margin-top: 20px">Оформить</button>
         </form>
 	</div>

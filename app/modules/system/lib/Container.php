@@ -7,6 +7,7 @@ use App\Modules\Catalog\Product;
 use App\Modules\Sale\Basket;
 use App\Modules\Sale\Cities;
 use App\Modules\Sale\DeliveryCompanies;
+use App\Modules\Sale\PaymentTypes;
 
 class Container
 {
@@ -30,6 +31,7 @@ class Container
 			Basket::class => fn() => new Basket(self::get(Db::class)),
 			DeliveryCompanies::class => fn() => new DeliveryCompanies(self::get(Db::class)),
 			Cities::class => fn() => new Cities(self::get(Db::class)),
+			PaymentTypes::class => fn() => new PaymentTypes(self::get(Db::class)),
 		];
 	}
 
