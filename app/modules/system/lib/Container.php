@@ -5,6 +5,7 @@ namespace App\Modules\System;
 use App\Modules\Catalog\Category;
 use App\Modules\Catalog\Product;
 use App\Modules\Sale\Basket;
+use App\Modules\Sale\DeliveryCompanies;
 
 class Container
 {
@@ -26,6 +27,7 @@ class Container
 			Category::class => fn() => new Category(self::get(Db::class)),
 			Product::class => fn() => new Product(self::get(Db::class)),
 			Basket::class => fn() => new Basket(self::get(Db::class)),
+			DeliveryCompanies::class => fn() => new DeliveryCompanies(self::get(Db::class)),
 		];
 	}
 

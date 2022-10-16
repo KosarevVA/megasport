@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Modules\Sale\DeliveryCompanies;
 use App\Modules\System\Container;
 use App\Modules\System\GlobalStorage;
 use \App\Modules\Sale\Basket as BT;
@@ -33,10 +34,12 @@ class Basket implements \App\Modules\System\ControllerInterface
 		$basket = $container->get(BT::class);
 		$basketItems = $basket->getBasketByUserId($user['id']);
 		$orderPrice = $basket->getOrderPriceByBasketItems($basketItems);
+		$deliveryCompanies = $container->get(DeliveryCompanies::class)->getDeliveryCompanies();
 		$view = new View();
 		$view->show('basket', [
 			'BASKET' => $basketItems,
-			'ORDER_PRICE' => $orderPrice
+			'ORDER_PRICE' => $orderPrice,
+			'DELIVERY_COMPANIES' => $deliveryCompanies
 		]);
 	}
 

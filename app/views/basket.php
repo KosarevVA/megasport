@@ -24,10 +24,11 @@ $this->setTitle('Корзина');
         <form action="/megasport/orders/create/" method="post">
             <h4>Доставка</h4>
             <label for="exampleDataList" class="form-label">Транспортная компания</label>
-            <input class="form-control" list="deliveryOptions" id="exampleDataList" placeholder="Выберите транспортную компанию..." name="delivery_type">
-            <datalist id="deliveryOptions">
-                <option value="СДЭК">
-            </datalist>
+            <select class="form-control" id="exampleDataList" name="delivery_type">
+                <?foreach($result['DELIVERY_COMPANIES'] as $company):?>
+                    <option value="<?=$company['id']?>"><?=$company['name']?></option>
+                <?endforeach;?>
+            </select>
             <label for="exampleDataList" class="form-label">Город</label>
             <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Выберите город..." name="city">
             <datalist id="datalistOptions">
