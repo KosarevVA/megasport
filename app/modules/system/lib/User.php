@@ -83,7 +83,7 @@ class User
 				$user = $this->db->sqlExecution($sql, [$email]);
 				if($user)
 				{
-					if(password_verify($password, $user['password']))
+					if(password_verify($password, $user[0]['password']))
 					{
 						$userSessionParameters = [
 							'id' => $user['id'],
