@@ -1,5 +1,6 @@
 <?
 $this->setTitle('Корзина');
+$session = \App\Modules\System\Container::getInstance()->get(\App\Modules\System\Session::class);
 ?>
 <div class="container-fluid">
 	<div class="container col-lg-8 col-md-7 col-sm-6">
@@ -49,6 +50,12 @@ $this->setTitle('Корзина');
             </select>
             <button class="btn btn-success" style="margin-top: 20px">Оформить</button>
         </form>
+        <?if($errors = $session->get('ORDER_ERRORS')):?>
+            <?foreach ($errors as $error):?>
+                <div class="alert alert-danger" role="alert"><?=$error?></div>
+            <?endforeach;?>
+            <?unset($_SESSION['ORDER_ERRORS']);?>
+        <?endif;?>
 	</div>
 </div>
 <script>
