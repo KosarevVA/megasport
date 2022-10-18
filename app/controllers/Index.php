@@ -9,6 +9,7 @@ class Index implements ControllerInterface
 {
 	public function index()
 	{
+		header('Location: /megasport/categories/');
 		$view = new View();
 		$view->show('main', []);
 	}
