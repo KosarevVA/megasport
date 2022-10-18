@@ -13,4 +13,10 @@ class Index implements ControllerInterface
 		$view = new View();
 		$view->show('main', []);
 	}
+
+	public function contacts()
+	{
+		$view = new View();
+		$view->show('contacts', []);
+	}
 }

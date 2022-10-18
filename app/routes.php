@@ -19,4 +19,5 @@ return [
 	'/megasport/basket/minus/' => new Route('Basket', 'minus'),
 	'/megasport/orders/create/' => new Route('Orders', 'create'),
 	'/megasport/orders/' => new Route('Orders', 'index'),
+	'/megasport/contacts/' => new Route('Index', 'contacts'),
 ];
