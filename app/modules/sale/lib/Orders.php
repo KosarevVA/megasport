@@ -81,4 +81,14 @@ class Orders
 		}
 		return $errors;
 	}
+
+	public function getOrders()
+	{
+		$container = Container::getInstance();
+		$session = $container->get(Session::class);
+		$user = $session->get('USER');
+
+		$sql = "SELECT `orders`.*, `statuses`.`name` as 'st_name', `payments`.`paid`, `payment_types`.`name` as 'pt_name' FROM `orders` JOIN `statuses` ON `orders`.`status` = `statuses`.`id` JOIN `payments` ON `orders`.`payment` = `payments`.`id` JOIN `payment_types` ON `payments`.`payment_type` = `payment_types`.`id` WHERE `orders`.`user` = :user";
+		return $this->db->sqlExecution($sql, [$user['id']]);
+	}
 }

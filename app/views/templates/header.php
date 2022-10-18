@@ -68,12 +68,12 @@ use App\Modules\System\User;
 					<li><a href="/megasport/categories/">Каталог</a></li>
 					<li><a href="company.html">Компания</a></li>
 					<li><a href="contacts.html">Контакты</a></li>
-					<li><a href="news.html">Новости</a></li>
                     <?
                     $user = Container::getInstance()->get(User::class);
                     if($user->isAuthorized()):
                     ?>
 					<li><a href="/megasport/basket/">Корзина</a></li>
+                    <li><a href="/megasport/orders/">Заказы</a></li>
 					<li><a href="/megasport/logout/">Выйти</a></li>
                     <?else:?>
                     <li><a href="/megasport/signin/">Войти</a></li>

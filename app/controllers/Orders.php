@@ -23,4 +23,13 @@ class Orders implements \App\Modules\System\ControllerInterface
 			header('Location: /megasport/');
 		}
 	}
+
+	public function index()
+	{
+		$container = Container::getInstance();
+		$orders = $container->get(\App\Modules\Sale\Orders::class);
+		$orders = $orders->getOrders();
+		$view = new View();
+		$view->show('orders', $orders);
+	}
 }
