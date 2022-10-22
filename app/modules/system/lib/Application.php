@@ -23,6 +23,7 @@ class Application
 		$autoloader = new Psr4Autoloader();
 		$autoloader->register();
 		$autoloader->addNamespace('App\Modules\System\\', 'app/modules/system/lib/');
+		$autoloader->addNamespace('App\Modules\System\Tests\\', 'app/modules/system/tests/');
 		$autoloader->addNamespace('App\Modules\Catalog\\', 'app/modules/catalog/lib/');
 		$autoloader->addNamespace('App\Modules\Sale\\', 'app/modules/sale/lib/');
 		$autoloader->addNamespace('App\Controllers\\', 'app/controllers/');
